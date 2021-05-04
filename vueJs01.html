@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+</head>
+<body>
+    
+    <div id="app">      <!-- span 태그에 있는 글자를 name이라는 변수에 할당된 글자로 바꾼다. -->
+        <h1>Hello, {{ name }}, <span v-text="name"></span></h1>
+        <h3>{{ address }}</h3>
+        <!-- v-html은 html이라는 변수에 할당된 데이터를 html 형식으로 나타낸다. -->
+        <h3><span v-html="html"></span></h1></h3>
+        <!-- v-show는 visible이라는 변수에 할당된 데이터를 보였다가 안보였다가 할 수 있다. -->
+        <span v-show="visible" v-html="name" v-text="name"></span>
+    </div>
+    
+    <!-- vue js는 뒤에다 작성을 해야한다. -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <script>
+        // 새로운 vue 객체를 정의합니다
+        var app = new Vue({
+            el: '#app', // 어떤 엘리먼트에 적용을 할 지 정합니다. UI. View
+            
+            // data 는 해당 뷰에서 사용할 정보를 지닙니다. Data. Model
+            data: { // 초기 값
+                name: 'World',
+                address: "seoul",
+                html:"<i>vue.js</i>",
+
+                // true와 false로 설정
+                visible: true
+            }   
+        });
+
+        // 변경 값
+        app.name = "홍길동";
+    </script>
+</body>
+</html>
