@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directive</title>
+</head>
+<body>
+    <div id="app">
+        <h1>카운터 {{ num }}</h1>
+        <!-- v-on:이벤트이름 = "메소드이름" -->
+        <!-- 어떤 함수를 불러올지 정한다.(레퍼런스(함수의 이름)만 전달해준다.) -->
+        <!--  -->
+        <button v-on:click="increment">+</button>
+        <button v-on:click="decrement">-</button>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                // java에서의 멤버수(전역변수)와 비슷하다.
+                num: 0,
+            },
+
+            // 함수를 만들 때는 methods 안에다 만든다.
+            methods: {
+                increment: function(){
+                    // 메소드 내에서 인스턴스 내부의 데이터 모델에 접근할 때는 this 키워드를 사용.
+                    // 여기서 this는 Vue에서 만들어지는 객체(변수)들을 가르킨다.
+                    this.num++;
+                },
+                decrement: function(){
+                    this.num--;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

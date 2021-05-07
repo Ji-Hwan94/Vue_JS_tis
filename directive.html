@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diractive</title>
+</head>
+<body>
+    <div id="app">
+        <h1 v-if="value > 5"> value가 5보다 큽니다. </h1>
+        <h1 v-else-if="value === 5"> value가 5와 같습니다. </h1>
+        <h1 v-else> value가 5보다 작습니다.</h1>
+        <h1 v-pre> {{ 이건 그대로 렌더링 해줍니다. }} </h1>
+        <!-- 이미지를 불러오는 방법 -->
+        <img v-bind:src="feelsgood">
+        
+        <!-- 이미지를 불러오는 방법(약식) -->
+        <img :src="feelsgoods">
+
+        <!-- 날짜를 불러온다. -->
+        <h2>{{ Date() }}</h2>
+
+        <!-- 삼항연산자로 이미지를 만든다. -->
+        <img :src="smile ? feelsgood : feelsbad" />
+
+        <!-- for를 이용해서 텍스트 생성 -->
+        <h2>오늘 할 일</h2>
+        <ul>
+            <li v-for="todo in todos">{{ todo.text }}</li>
+        </ul>
+    </div>
+    
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                value: 6,
+                smile:false,
+                feelsgood: 'img/1.png',
+                feelsbad: 'img/2.png',
+                todos: [
+                    { text: 'Vue.js 튜토리얼 작성하기' },
+                    { text: 'Webpack2 알아보기' },
+                    { text: '사이드 프로젝트 진행하기 '}
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

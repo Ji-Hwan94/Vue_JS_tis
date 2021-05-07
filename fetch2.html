@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fetch</title>
+
+  </head>
+  <body>
+   <div id='app'>
+	<div v-for='product in products'>
+		<h3>{{ product.name }}</h3>
+		<p>{{ product.price }}</p>
+		
+	</div>
+	</div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        new Vue({
+		    el: '#app',
+		    data: {
+		    	products: []
+		    },
+		    // Vue객체가 생성된 된 후, 호출을 한 다음에 fetch를 시도
+		    created() {
+		    	fetch('http://pjs.dothome.co.kr/ajaxDB2.php')
+		    		.then((response) => {
+		    			if(response.ok) {
+		    				return response.json();
+		    			}
+                    
+		    			throw new Error('Network response was not ok');
+		    		})
+		    		.then((json) => {
+		    			// 넘어오는 데이터가 여러 개 일때 push를 사용하지 않는다.
+		    			this.products=json;
+		    		})
+		    		.catch((error) => {
+		    			console.log(error);
+		    		});
+		    }
+	    });
+    </script>
+  </body>
+</html>

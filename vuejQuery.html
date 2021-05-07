@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바인딩</title>
+    <!-- (document).ready로 인해서 문서가 다 끝난후에 실행된다. 따라서 jquery와 vue.js를 같이 사용하는 경우, vue.js 스크립트를 위에 작성이 가능하다. -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            console.log("start");
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    id: "",
+                    name: "",
+                    address: ""
+                },
+                methods: {
+                    getMember: function(){
+                        $.ajax({
+                            url:"http://ghkdrbqhd3.ivyro.net/ajaxDB3.php?id=ghkdrbqhd",
+                            dataType:"json",
+                            success: function(data){
+                                console.log(data);
+
+                                app.id = data.id;
+                                app.name = data.name;
+                                app.address = data.address;
+                            }
+                        });
+                    },
+                    updateMember: function(){
+                        console.log("====== now update =====");
+                        var frmData = $("#frm1").serialize();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "http://ghkdrbqhd3.ivyro.net/memberUpdate.php",
+                            data: frmData,
+                            success: function(res){
+                                if(res){
+                                    console.log(res.message);
+                                    $("#message").html(res.message);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            app.getMember();
+        });
+    </script>
+</head>
+<body>
+    <div id='app'>
+        <form id="frm1">
+            <!-- 바인딩 -->
+                <input type="text" name="id" v-model="id" readonly><br>
+                name <input type="text" name="name" v-model="name"><br>
+                address <input type="text" name="address" v-model="address"><br>
+                <input id="modify" type="button" v-on:click="updateMember" value="회원정보수정">
+        </form>
+        <div id="message"></div>
+	</div>
+</body>
+</html>

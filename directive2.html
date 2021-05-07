@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directive</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Hello, {{ name }}</h1>
+        <!-- 입력한 데이터를 그대로 받는다. -->
+        <input type="text" v-model="name">
+
+        <!-- check box를 통해서 이미지를 변화 -->
+        <h3><input type="checkbox" v-model="check">하나만 말해줘 yes or no</h3>
+        <img :src="check? yes:no">
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+        var App = new Vue({
+            el: '#app',
+            data: {
+                name: "world",
+                check: true,
+                yes: "img/o.png",
+                no: "img/x.png"
+            }
+        });
+    </script>
+</body>
+</html>
